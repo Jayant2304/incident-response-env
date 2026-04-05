@@ -1,0 +1,28 @@
+spec_version: 1
+name: incident-response-env
+description: >
+  Production incident response environment for training AI agents in SRE
+  diagnosis. Agents receive logs, metrics, and service dependency maps for
+  realistic production incidents and must identify the root cause, affected
+  service, remediation, and blast radius.
+author: Jayant Aggarwal
+version: 0.1.0
+
+action_model: IncidentAction
+observation_model: IncidentObservation
+state_model: IncidentState
+
+endpoints:
+  reset: POST /reset
+  step: POST /step
+  state: GET /state
+  health: GET /health
+  metadata: GET /metadata
+  schema: GET /schema
+  mcp: POST /mcp
+
+tasks:
+  easy: 3
+  medium: 4
+  hard: 5
+  total: 12
