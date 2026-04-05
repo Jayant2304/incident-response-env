@@ -2,6 +2,8 @@
 
 from __future__ import annotations
 
+import os
+
 from openenv.core.env_server import create_fastapi_app
 
 from constants import PROJECT_DESCRIPTION, VERSION
@@ -42,3 +44,14 @@ def list_tasks() -> dict[str, list[str]]:
 
 
 app.include_router(mcp_router)
+
+
+def main() -> None:
+    import uvicorn
+
+    port = int(os.environ.get("PORT", 7860))
+    uvicorn.run(app, host="0.0.0.0", port=port)
+
+
+if __name__ == "__main__":
+    main()
