@@ -15,15 +15,15 @@ An OpenEnv-compatible RL training environment where AI agents diagnose realistic
 
 ```bash
 # Health check
-curl https://YOUR_USERNAME-incident-response-env.hf.space/health
+curl https://jayant2304-incident-response-env.hf.space/health
 
 # Start an episode (OpenEnv ResetRequest body)
-curl -X POST https://YOUR_USERNAME-incident-response-env.hf.space/reset \
+curl -X POST https://jayant2304-incident-response-env.hf.space/reset \
   -H "Content-Type: application/json" \
   -d '{"task_id": "easy_001"}'
 
 # Submit a diagnosis (OpenEnv StepRequest body)
-curl -X POST https://YOUR_USERNAME-incident-response-env.hf.space/step \
+curl -X POST https://jayant2304-incident-response-env.hf.space/step \
   -H "Content-Type: application/json" \
   -d '{
     "action": {

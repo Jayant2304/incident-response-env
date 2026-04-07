@@ -26,7 +26,7 @@ from openai import OpenAI
 API_BASE_URL = os.getenv("API_BASE_URL", "https://api.openai.com/v1")
 MODEL_NAME = os.getenv("MODEL_NAME", "gpt-4o-mini")
 HF_TOKEN = os.getenv("HF_TOKEN") or os.getenv("API_KEY", "")
-ENV_BASE_URL = os.getenv("ENV_BASE_URL", "http://localhost:8000")
+ENV_BASE_URL = os.getenv("ENV_BASE_URL", "https://jayant2304-incident-response-env.hf.space")
 BENCHMARK = "incident-response-env"
 
 SYSTEM_PROMPT = """You are an expert Site Reliability Engineer (SRE) specialising in production incident response.
