@@ -28,7 +28,7 @@ class TestGrader:
         )
         keys = TASKS["easy_001"].grader_keys
         total, breakdown, _ = grade_incident(action, keys)
-        assert total == 1.0
+        assert total == 0.99
 
     def test_wrong_service_scores_zero_service(self):
         action = IncidentAction(
@@ -85,7 +85,7 @@ class TestGrader:
                 blast_radius="isolated",
             )
             total, _, _ = grade_incident(action, task.grader_keys)
-            assert 0.0 <= total <= 1.0
+            assert 0.01 <= total <= 0.99
 
     def test_hard_task_replica_lag_keywords(self):
         action = IncidentAction(
@@ -96,7 +96,7 @@ class TestGrader:
         )
         keys = TASKS["hard_001"].grader_keys
         total, _, _ = grade_incident(action, keys)
-        assert total == 1.0
+        assert total == 0.99
 
     def test_hard_task_partition_keywords(self):
         action = IncidentAction(
@@ -107,7 +107,7 @@ class TestGrader:
         )
         keys = TASKS["hard_005"].grader_keys
         total, _, _ = grade_incident(action, keys)
-        assert total == 1.0
+        assert total == 0.99
 
 
 # =========================================================================
@@ -219,8 +219,8 @@ class TestEnvironment:
             remediation="try something",
             blast_radius="isolated",
         ))
-        assert obs_good.reward == 1.0
-        assert obs_bad.reward == 0.0
+        assert obs_good.reward == 0.99
+        assert obs_bad.reward == 0.01
 
 
 # =========================================================================
@@ -270,7 +270,7 @@ class TestTaskDataset:
                 blast_radius=keys.blast_radius_key,
             )
             total, _, _ = grade_incident(action, keys)
-            assert total == 1.0, f"Task {tid}: perfect answer scored {total}"
+            assert total == 0.99, f"Task {tid}: perfect answer scored {total}"
 
 
 # =========================================================================
@@ -323,7 +323,7 @@ class TestAPI:
         assert r.status_code == 200
         data = r.json()
         assert data["done"] is True
-        assert data["reward"] == 1.0
+        assert data["reward"] == 0.99
 
     def test_step_without_reset_returns_error(self):
         import server.app as app_mod

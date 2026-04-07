@@ -70,5 +70,6 @@ def grade_incident(
     ))
 
     total_reward = round(sum(breakdown.values()), 4)
+    total_reward = max(0.01, min(0.99, total_reward))
     feedback = " | ".join(feedback_parts)
     return total_reward, breakdown, feedback
