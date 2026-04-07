@@ -96,7 +96,7 @@ def parse_llm_response(raw: str) -> dict:
 def run_task(client: OpenAI, task_id: str) -> dict[str, Any]:
     rewards: list[float] = []
     steps_taken = 0
-    score = 0.0
+    score = 0.01
     success = False
 
     log_start(task=task_id, env=BENCHMARK, model=MODEL_NAME)
@@ -136,14 +136,14 @@ def run_task(client: OpenAI, task_id: str) -> dict[str, Any]:
         action_str = json.dumps(action, separators=(",", ":"))
         log_step(step=1, action=action_str, reward=reward, done=done, error=None)
 
-        score = reward
-        success = score > 0.0
+        score = max(0.01, min(0.99, reward))
+        success = score > 0.01
 
     except Exception as exc:
         steps_taken = max(steps_taken, 1)
         if not rewards:
-            rewards.append(0.0)
-        log_step(step=steps_taken, action="error", reward=0.0, done=True, error=str(exc))
+            rewards.append(0.01)
+        log_step(step=steps_taken, action="error", reward=0.01, done=True, error=str(exc))
 
     finally:
         log_end(success=success, steps=steps_taken, score=score, rewards=rewards)
